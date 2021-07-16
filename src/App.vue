@@ -1,32 +1,78 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app" class="flex-column">
+    <!-- Loading -->
+    <GlobalLoading v-if="getLoadingState && getLoadingState.globalLoading" />
+    <!-- Modals -->
+    <Modals v-if="getModals && Object.values(getModals).some( modal => Object.values(modal).some( el => el.state === true ))" />
+    <!-- Header -->
+    <Header v-if="!navigationDisabled" />
+    <!-- Routes -->
+    <keep-alive>
+        <router-view/>
+    </keep-alive>
+  
+    <!-- Footer -->
+    <Footer v-if="!navigationDisabled"/>
   </div>
 </template>
+<script>
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
+import GlobalLoading from "@/components/Loading/GlobalLoading";
+import 'vue-toast-notification/dist/theme-sugar.css';
+import { auth } from "@/config/firebase"; 
+import { mapActions, mapGetters } from "vuex";
+import Modals from "@/components/Modals/Modals";
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  name: "App",
+  data(){
+    return {
+      navigationDisabled: false 
     }
-  }
+  },
+  computed: {
+    ...mapGetters("modals", ["getModals"]),
+    ...mapGetters("toggleKeys", ["getLoadingState"])
+  },
+  methods: {
+    ...mapActions("blogList", ["updateBlogs"]),
+    ...mapActions("user", ["updateUserState", "updateUID"]),
+    checkNavigation () {
+        const currentRouteName = this.$route.name;
+        if(currentRouteName === "Authentication"){
+          this.navigationDisabled = true;
+          return;
+        }
+        this.navigationDisabled = false;
+    }
+   },
+  watch: {
+     $route() {
+       this.checkNavigation();
+     }
+  },
+  components:{
+    Header,
+    Footer,
+    Modals,
+    GlobalLoading
+  },
+  mounted(){ 
+    const { updateUserState, checkNavigation, updateUID, updateBlogs } = this;
+  
+    auth.onAuthStateChanged((authUser) => {
+      if(authUser){ 
+        updateUserState(true);
+        // connected
+        updateUID(authUser?.uid);
+        updateBlogs();
+      }else{
+        // disconnected
+        updateUserState(false);
+      }
+    });
+    checkNavigation();
+  },
 }
-</style>
+</script>
