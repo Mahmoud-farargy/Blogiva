@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import appConfig from "@/config/app-config.json";
+import appConfig from "../../../config/app-config.json";
 import { routeNames } from "../../Consts";
 import { mapGetters } from 'vuex';
 

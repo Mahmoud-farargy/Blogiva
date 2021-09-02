@@ -30,7 +30,7 @@
 <script>
 import Quill from "quill";
 import { mapActions, mapGetters } from 'vuex';
-import { storageRef } from "@/config/firebase";
+import { storageRef } from "../../config/firebase";
 import { routeNames } from "@/Consts" ;
 import { notify, handleLoading, uploadBlogPost, generateNewId } from "@/utilities";
 window.Quill = Quill;

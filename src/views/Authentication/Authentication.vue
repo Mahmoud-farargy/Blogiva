@@ -17,7 +17,7 @@ import * as Consts from "../../Consts";
 import Login from "@/components/Authentication/Login";
 import Register from "@/components/Authentication/Register";
 import ForgotPassword from "@/components/Authentication/ForgotPassword";
-import appConfig from "@/config/app-config.json";
+import appConfig from "../../../config/app-config.json";
 import { login, signUp, resetPassword, notify } from "@/utilities.js";
 
 export default {
@@ -54,10 +54,14 @@ export default {
         // todo: form validations
         this.submitted = true;
         if(form){
-            const { type = 'login', inputs = {} } = form?.form;
+            const { type = 'login', inputs = {}} = form?.form;
+            const { password, email } = inputs;
             if(type && Object.values(inputs).some(input => input !== 'undefined')) switch(type.toLowerCase().trim()){
                 case 'login': {
-                        this.loginUser(inputs);
+                  if(password && email){
+                     this.loginUser(inputs);
+                  }
+                       
                 break; 
                 }
                    
