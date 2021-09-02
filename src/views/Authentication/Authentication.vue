@@ -52,9 +52,10 @@ export default {
     },
     onFormSubmission(form){
         // todo: form validations
-        this.submitted = true;
+      
         if(form){
-            const { type = 'login', inputs = {}} = form?.form;
+            const { type = 'login', inputs = {}, isAnonymous = false} = form?.form; 
+           this.submitted = !isAnonymous;
             const { password, email } = inputs;
             if(type && Object.values(inputs).some(input => input !== 'undefined')) switch(type.toLowerCase().trim()){
                 case 'login': {

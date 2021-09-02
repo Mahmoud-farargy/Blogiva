@@ -215,7 +215,15 @@ body{
 
   .post-view {
     min-height: 100%;
-  
+    .post-content{
+      line-height: 1.6;
+      font-size: 1.26rem;
+      margin-bottom: 1.33em;
+      font-weight: 500;
+      img{
+        margin-top: 15px;
+      }
+    }
     .container {
       max-width: 1000px;
       padding: 60px 25px;
@@ -258,4 +266,10 @@ body{
     .mobile--only{
         display: flex;
     }
+}
+
+@media only screen and (max-width: 670px){
+  .post-view .post-content{
+    font-size: 16px;
+  }
 }
