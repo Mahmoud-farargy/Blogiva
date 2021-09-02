@@ -104,7 +104,7 @@ export default {
   methods: {
       loginAnonymously() {
           const { email = "", password = "" } = anonymousLogInfo;
-          this.onFormSubmission({ form: { type: 'login', inputs: {email, password} } })
+          this.onFormSubmission({ form: { type: 'login', inputs: {email, password}, isAnonymous: true } })
       }
   }
 };
