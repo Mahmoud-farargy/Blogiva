@@ -1,8 +1,8 @@
-import { db, auth, storageRef } from "./config/firebase";
+import { db, auth, storageRef } from "../config/firebase";
 import store from "./state/store";
 import router from "./router/index";
 import Vue from "vue";
-import appConfig from "./config/app-config.json";
+import appConfig from "../config/app-config.json";
 import * as Consts from "./Consts";
 
 export const defaultErrMsg = "An error has occurred";
@@ -120,10 +120,11 @@ export const signOut = () => {
         auth.signOut().then(() => {
             handleLoading('globalLoading', false);
             store.dispatch("user/updateUserState", false);
-            notify({ type: "default", msg: "You are now logged out."});
             store.dispatch("blogList/clearData");
+            notify({ type: "default", msg: "You are now logged out."});
             store.dispatch("user/updateUID", "");
             localStorage.clear();
+
             redirectUser(Consts.routeNames.home);
             resolve();
             // window.location.reload();

@@ -51,6 +51,8 @@ export default {
             const blogList = this.getBlogs;
             if(this.isUserOnline && this.getReceivedData && blogList ){
                 this.cardList = blogList;
+            }else{
+                this.cardList = list?.sampleCards;
             }
         },
         directToCreatePost(){

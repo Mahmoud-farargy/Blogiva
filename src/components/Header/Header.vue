@@ -26,7 +26,7 @@
 <script>
 import menuIcon from "@/assets/Icons/bars-regular.svg";
 import HeaderNav from "./HeaderNav/HeaderNav";
-import appConfig from "@/config/app-config.json";
+import appConfig from "../../../config/app-config.json";
 export default {
     name: "Header",
     components: {

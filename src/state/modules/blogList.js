@@ -1,4 +1,4 @@
-import { db } from "@/config/firebase.js";
+import { db } from "../../../config/firebase";
 import { mainCollection } from "@/Consts";
 import { handleLoading } from "@/utilities.js";
 import store from "../store";

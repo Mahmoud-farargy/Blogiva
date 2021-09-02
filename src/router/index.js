@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import appConfig from "@/config/app-config.json";
+import appConfig from "../../config/app-config.json";
 import { routes } from "./routes.js";
 import store from "@/state/store";
 import { routeNames } from "@/Consts";

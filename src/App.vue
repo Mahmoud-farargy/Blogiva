@@ -20,7 +20,7 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import GlobalLoading from "@/components/Loading/GlobalLoading";
 import 'vue-toast-notification/dist/theme-sugar.css';
-import { auth } from "@/config/firebase"; 
+import { auth } from "../config/firebase"; 
 import { mapActions, mapGetters } from "vuex";
 import Modals from "@/components/Modals/Modals";
 
