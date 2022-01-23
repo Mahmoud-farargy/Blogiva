@@ -1,5 +1,7 @@
 # blogiva
 
+Desgin inspired by <a hrfe="https://www.frontendmentor.io/challenges">Frontendmentor.io</a>
+
 ## Project setup
 ```
 npm install
